@@ -6,9 +6,9 @@ import { locations } from '../data/locations'
 const museumMarker = L.divIcon({
   className: 'museum-marker',
   html: '<span></span>',
-  iconSize: [28, 28],
-  iconAnchor: [14, 14],
-  popupAnchor: [0, -16],
+  iconSize: [34, 34],
+  iconAnchor: [17, 17],
+  popupAnchor: [0, -18],
 })
 
 function RussiaMap() {
@@ -32,24 +32,28 @@ function RussiaMap() {
           position={location.coordinates}
         >
           <Popup>
-            <div className="w-64 space-y-3 p-1">
-              <div>
-                <p className="text-xs font-bold uppercase tracking-widest text-red-800">
-                  Điểm dừng lịch sử
+            <div className="w-72 overflow-hidden rounded-md bg-[#111110] text-white">
+              <div
+                className="h-28 bg-cover bg-center"
+                style={{ backgroundImage: `url('${location.bannerImage}')` }}
+              />
+              <div className="p-4">
+                <p className="text-xs font-bold uppercase tracking-[0.24em] text-amber-300">
+                  {location.exhibitCode}
                 </p>
-                <h3 className="mt-1 text-base font-bold text-zinc-950">
+                <h3 className="mt-2 text-lg font-black leading-tight text-white">
                   {location.name}
                 </h3>
+                <p className="mt-3 text-sm leading-6 text-zinc-300">
+                  {location.philosophy[0]}
+                </p>
+                <Link
+                  to={`/locations/${location.id}`}
+                  className="mt-4 inline-flex w-full items-center justify-center rounded-md bg-amber-300 px-4 py-2.5 text-sm font-black uppercase tracking-wider text-zinc-950 transition hover:bg-amber-200"
+                >
+                  Mở phòng trưng bày
+                </Link>
               </div>
-              <p className="text-sm leading-6 text-zinc-600">
-                {location.philosophy[0]}
-              </p>
-              <Link
-                to={`/locations/${location.id}`}
-                className="inline-flex w-full items-center justify-center rounded-md bg-red-900 px-4 py-2 text-sm font-bold text-white transition hover:bg-red-800"
-              >
-                Khám phá
-              </Link>
             </div>
           </Popup>
         </Marker>

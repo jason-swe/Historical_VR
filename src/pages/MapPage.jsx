@@ -1,42 +1,58 @@
+import { Link } from 'react-router-dom'
 import RussiaMap from '../components/RussiaMap'
 import { locations } from '../data/locations'
 
 function MapPage() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-      <div className="grid gap-8 lg:grid-cols-[0.95fr_1.55fr] lg:items-start">
-        <aside>
-          <p className="text-sm font-bold uppercase tracking-widest text-red-900">
-            Saint Petersburg, Nga
+    <section className="min-h-[calc(100svh-68px)] bg-[#10100f] text-white">
+      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-8 sm:px-6 sm:py-12 lg:grid-cols-[0.88fr_1.55fr] lg:px-8">
+        <aside className="lg:sticky lg:top-24">
+          <p className="text-xs font-bold uppercase tracking-[0.38em] text-amber-300">
+            Virtual Museum / Saint Petersburg
           </p>
-          <h1 className="mt-3 text-3xl font-black leading-tight text-zinc-950 sm:text-5xl">
-            Bản đồ hành trình Cách mạng Tháng Mười
+          <h1 className="mt-4 max-w-2xl text-4xl font-black leading-tight text-white sm:text-6xl">
+            Bản đồ triển lãm Cách mạng Tháng Mười
           </h1>
-          <p className="mt-5 leading-8 text-zinc-600">
-            Click vào từng marker để xem phạm trù triết học liên quan và đi tới
-            trang trải nghiệm chi tiết. Các điểm dừng được sắp xếp như một
-            tuyến học tập: kinh tế, công nhân, tri thức và quyền lực chính trị.
+          <p className="mt-5 max-w-xl text-base leading-8 text-zinc-300">
+            Chọn một điểm trên bản đồ để bước vào phòng trưng bày số. Mỗi địa
+            điểm được kể như một lát cắt lịch sử, gắn với timeline và khái niệm
+            triết học cốt lõi.
           </p>
 
-          <div className="mt-6 grid gap-3">
-            {locations.map((location) => (
-              <div
+          <div className="mt-8 grid gap-3">
+            {locations.map((location, index) => (
+              <Link
                 key={location.id}
-                className="rounded-lg border border-red-950/10 bg-white p-4 shadow-sm"
+                to={`/locations/${location.id}`}
+                className="group rounded-lg border border-white/10 bg-white/[0.06] p-4 backdrop-blur transition hover:-translate-y-0.5 hover:border-amber-300/70 hover:bg-white/[0.1]"
               >
-                <h2 className="font-black text-zinc-950">
-                  {location.shortName}
-                </h2>
-                <p className="mt-2 text-sm leading-6 text-zinc-600">
-                  {location.philosophy.join(' • ')}
-                </p>
-              </div>
+                <div className="flex items-start gap-4">
+                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-md border border-amber-300/30 bg-amber-300/10 text-sm font-black text-amber-200">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.24em] text-zinc-400">
+                      {location.exhibitCode}
+                    </p>
+                    <h2 className="mt-1 text-lg font-black text-white">
+                      {location.shortName}
+                    </h2>
+                    <p className="mt-2 text-sm leading-6 text-zinc-300">
+                      {location.theme}
+                    </p>
+                  </div>
+                </div>
+              </Link>
             ))}
           </div>
         </aside>
 
-        <div className="overflow-hidden rounded-lg border border-red-950/10 bg-white p-2 shadow-xl">
+        <div className="relative overflow-hidden rounded-lg border border-white/10 bg-[#171716] p-3 shadow-2xl shadow-black/40">
+          <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-20 bg-gradient-to-b from-black/35 to-transparent" />
           <RussiaMap />
+          <div className="pointer-events-none absolute bottom-5 left-5 z-10 rounded-md border border-white/10 bg-black/55 px-4 py-3 text-xs font-bold uppercase tracking-[0.24em] text-amber-200 backdrop-blur">
+            Interactive Historical Storytelling
+          </div>
         </div>
       </div>
     </section>

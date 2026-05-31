@@ -5,11 +5,11 @@ function QuizCard({ quiz }) {
   const isAnswered = selected !== null
 
   return (
-    <section className="rounded-lg border border-red-950/10 bg-white p-5 shadow-sm sm:p-6">
-      <p className="text-sm font-bold uppercase tracking-widest text-red-900">
+    <section className="rounded-lg border border-white/10 bg-white/[0.06] p-5 shadow-sm sm:p-6">
+      <p className="text-xs font-bold uppercase tracking-[0.3em] text-amber-300">
         Câu hỏi tương tác
       </p>
-      <h2 className="mt-3 text-2xl font-black text-zinc-950">
+      <h2 className="mt-3 text-2xl font-black leading-tight text-white">
         {quiz.question}
       </h2>
 
@@ -25,15 +25,15 @@ function QuizCard({ quiz }) {
               onClick={() => setSelected(index)}
               className={`rounded-lg border px-4 py-3 text-left text-sm font-semibold transition ${
                 isAnswered && isCorrect
-                  ? 'border-emerald-500 bg-emerald-50 text-emerald-900'
+                  ? 'border-emerald-300 bg-emerald-300/15 text-emerald-100'
                   : ''
               } ${
                 isAnswered && isSelected && !isCorrect
-                  ? 'border-red-500 bg-red-50 text-red-950'
+                  ? 'border-red-300 bg-red-400/15 text-red-100'
                   : ''
               } ${
                 !isAnswered
-                  ? 'border-zinc-200 bg-stone-50 hover:border-amber-500 hover:bg-amber-50'
+                  ? 'border-white/10 bg-black/25 text-zinc-200 hover:border-amber-300/60 hover:bg-black/35'
                   : ''
               }`}
             >
@@ -44,8 +44,8 @@ function QuizCard({ quiz }) {
       </div>
 
       {isAnswered && (
-        <div className="mt-5 rounded-lg bg-amber-50 p-4 text-sm leading-6 text-zinc-700">
-          <strong className="text-zinc-950">
+        <div className="mt-5 rounded-lg border border-amber-300/25 bg-amber-300/10 p-4 text-sm leading-6 text-zinc-200">
+          <strong className="text-amber-100">
             {selected === quiz.answer ? 'Chính xác. ' : 'Chưa đúng. '}
           </strong>
           {quiz.explanation}

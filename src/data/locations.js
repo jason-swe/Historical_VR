@@ -4,16 +4,25 @@ export const locations = [
     name: 'Sở giao dịch chứng khoán St. Petersburg',
     shortName: 'Sở giao dịch chứng khoán',
     coordinates: [59.9441, 30.3062],
+    theme: 'Mâu thuẫn kinh tế',
+    exhibitCode: 'GALLERY 01',
+    accent: 'from-amber-300 to-orange-500',
     philosophy: [
       'Quy luật thống nhất và đấu tranh của các mặt đối lập',
       'Mâu thuẫn giữa lực lượng sản xuất và quan hệ sản xuất',
     ],
     bannerImage:
-      'https://commons.wikimedia.org/wiki/Special:FilePath/Birzha_Saint_Petersburg.jpg',
+      'https://www.gpsmycity.com/img/gd_sight/5073.jpg',
     description:
       'Khu vực mũi đảo Vasilyevsky và Sở giao dịch chứng khoán là biểu tượng của đời sống thương mại, tài chính và quan hệ kinh tế tại St. Petersburg trước cách mạng. Không gian này gợi mở mâu thuẫn giữa sự phát triển của sản xuất, trao đổi hàng hóa với trật tự xã hội cũ đang kìm hãm đời sống nhân dân.',
     philosophyContent:
       'Theo phép biện chứng duy vật, mâu thuẫn là nguồn gốc của vận động và phát triển. Khi lực lượng sản xuất biến đổi nhưng quan hệ sản xuất cũ không còn phù hợp, xung đột xã hội tích tụ. Cách mạng không xuất hiện như sự kiện ngẫu nhiên, mà là kết quả của những đối lập kinh tế - xã hội đã chín muồi.',
+    infographic: {
+      principle: 'Đối lập',
+      catalyst: 'Khủng hoảng kinh tế',
+      shift: 'Tích tụ xung đột',
+      takeaway: 'Mâu thuẫn xã hội tạo động lực cho bước chuyển cách mạng.',
+    },
     timeline: [
       {
         year: 'Đầu thế kỷ XX',
@@ -68,16 +77,25 @@ export const locations = [
     name: 'Nhà máy Putilov',
     shortName: 'Nhà máy Putilov',
     coordinates: [59.8798, 30.2619],
+    theme: 'Phong trào công nhân',
+    exhibitCode: 'GALLERY 02',
+    accent: 'from-rose-300 to-red-600',
     philosophy: [
       'Quy luật lượng - chất',
       'Sự tích lũy dẫn đến bước nhảy cách mạng',
     ],
     bannerImage:
-      'https://commons.wikimedia.org/wiki/Special:FilePath/Putilov_factory_1900s.jpg',
+      'https://thumbs.dreamstime.com/b/sign-name-kirov-plant-workshop-building-largest-machine-enterprise-saint-petersburg-russia-216985628.jpg',
     description:
       'Nhà máy Putilov là một trong những trung tâm công nghiệp lớn nhất Petrograd, nơi tập trung đông đảo công nhân. Các cuộc đình công và bất bình của công nhân tại đây góp phần mở đầu làn sóng đấu tranh rộng lớn trong năm 1917.',
     philosophyContent:
       'Quy luật lượng - chất cho thấy những thay đổi nhỏ, lặp lại và tích lũy có thể dẫn đến bước nhảy làm biến đổi bản chất sự vật. Trong xã hội Nga, tiền lương thấp, điều kiện lao động nặng nề, chiến tranh và thiếu lương thực tích tụ thành sức ép xã hội. Khi vượt ngưỡng, các yêu sách kinh tế chuyển hóa thành hành động chính trị cách mạng.',
+    infographic: {
+      principle: 'Tích lũy',
+      catalyst: 'Đình công',
+      shift: 'Bước nhảy',
+      takeaway: 'Những biến đổi về lượng có thể chuyển hóa thành biến đổi về chất.',
+    },
     timeline: [
       {
         year: 'Trước 1917',
@@ -132,16 +150,25 @@ export const locations = [
     name: 'Thư viện Quốc gia Nga',
     shortName: 'Thư viện Quốc gia Nga',
     coordinates: [59.9337, 30.3355],
+    theme: 'Tri thức cách mạng',
+    exhibitCode: 'GALLERY 03',
+    accent: 'from-sky-300 to-cyan-600',
     philosophy: [
       'Mối quan hệ giữa vật chất và ý thức',
       'Vai trò của tri thức trong hoạt động thực tiễn',
     ],
     bannerImage:
-      'https://commons.wikimedia.org/wiki/Special:FilePath/Russian_National_Library_Saint_Petersburg.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Russian_National_Bibliotheque,_Saint_Petersburg.jpg/960px-Russian_National_Bibliotheque,_Saint_Petersburg.jpg',
     description:
       'Thư viện Quốc gia Nga đại diện cho đời sống tri thức của St. Petersburg. Trong tiến trình cách mạng, sách báo, lý luận và tranh luận chính trị góp phần hình thành ý thức xã hội mới, giúp quần chúng nhận ra nguyên nhân sâu xa của khủng hoảng.',
     philosophyContent:
       'Chủ nghĩa duy vật biện chứng khẳng định vật chất quyết định ý thức, nhưng ý thức có tính độc lập tương đối và có thể tác động trở lại hiện thực thông qua hoạt động thực tiễn. Tri thức cách mạng không đứng ngoài đời sống; nó định hướng hành động, tổ chức lực lượng và biến nhận thức thành sức mạnh cải tạo xã hội.',
+    infographic: {
+      principle: 'Nhận thức',
+      catalyst: 'Sách báo',
+      shift: 'Hành động',
+      takeaway: 'Ý thức đúng đắn trở thành sức mạnh khi gắn với thực tiễn.',
+    },
     timeline: [
       {
         year: 'Thế kỷ XIX-XX',
@@ -196,6 +223,9 @@ export const locations = [
     name: 'Cung điện Mùa Đông',
     shortName: 'Cung điện Mùa Đông',
     coordinates: [59.9398, 30.3146],
+    theme: 'Chuyển giao quyền lực',
+    exhibitCode: 'GALLERY 04',
+    accent: 'from-emerald-300 to-teal-600',
     philosophy: [
       'Quy luật phủ định của phủ định',
       'Sự thay thế hình thái kinh tế xã hội cũ bằng cái mới',
@@ -206,6 +236,12 @@ export const locations = [
       'Cung điện Mùa Đông là biểu tượng quyền lực của chế độ cũ và là nơi gắn với thời khắc chính quyền lâm thời bị lật đổ trong Cách mạng Tháng Mười. Địa điểm này thể hiện rõ sự chuyển giao quyền lực từ trật tự cũ sang hình thức chính trị mới.',
     philosophyContent:
       'Quy luật phủ định của phủ định mô tả sự phát triển thông qua việc cái mới vượt qua cái cũ, kế thừa những yếu tố hợp lý và tạo ra trình độ phát triển cao hơn. Cách mạng Tháng Mười phủ định chế độ cũ và mở ra một mô hình quyền lực mới dựa trên Xô viết, phản ánh xu hướng thay thế hình thái kinh tế - xã hội đã lỗi thời.',
+    infographic: {
+      principle: 'Phủ định',
+      catalyst: 'Khủng hoảng quyền lực',
+      shift: 'Trật tự mới',
+      takeaway: 'Cái mới vượt qua cái cũ và mở một nấc thang phát triển khác.',
+    },
     timeline: [
       {
         year: 'Trước 1917',
@@ -223,7 +259,10 @@ export const locations = [
           'Theo lịch Julius khi đó, lực lượng cách mạng chiếm Cung điện Mùa Đông và lật đổ Chính phủ lâm thời.',
       },
     ],
-    vrLink: 'https://www.google.com/maps/embed?pb=',
+    vrLink:
+      'https://www.360cities.net/embed_iframe/palace-square-view-on-hermitage-museum-winter-palace-st-petersburg',
+    panoramaUrl:
+      'https://www.360cities.net/id/image/palace-square-view-on-hermitage-museum-winter-palace-st-petersburg#53.70,-1.60,70.0',
     hotspots: [
       {
         title: 'Bối cảnh lịch sử',
