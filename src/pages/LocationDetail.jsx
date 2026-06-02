@@ -1,12 +1,11 @@
-import { useRef } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import QuizCard from '../components/QuizCard'
+import StreetViewHotspotViewer from '../components/StreetViewHotspotViewer'
 import { getLocationById } from '../data/locations'
 
 function LocationDetail() {
   const { id } = useParams()
   const location = getLocationById(id)
-  const vrFrameRef = useRef(null)
 
   if (!location) {
     return <Navigate to="/map" replace />
@@ -17,15 +16,10 @@ function LocationDetail() {
     ['Tác nhân', location.infographic.catalyst],
     ['Chuyển hóa', location.infographic.shift],
   ]
-  const hasVrExperience =
-    location.vrLink && !location.vrLink.includes('google.com/maps/embed?pb=')
-
-  function openFullscreen() {
-    vrFrameRef.current?.requestFullscreen?.()
-  }
 
   return (
     <div className="detail-zoom bg-[#0f0f0e] text-white">
+      {/* Hero Section */}
       <section className="relative min-h-[88svh] overflow-hidden">
         <div
           className="absolute inset-0 scale-105 bg-cover bg-center detail-hero-image"
@@ -56,6 +50,20 @@ function LocationDetail() {
         </div>
       </section>
 
+      {/* Immersive 360 Panorama Viewer with hotspots */}
+      <section className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <div className="border-b border-white/10 pb-4 mb-6">
+          <p className="text-xs font-bold uppercase tracking-[0.3em] text-amber-300">
+            Trải nghiệm tương tác số
+          </p>
+          <h2 className="mt-2 text-3xl font-black text-white">
+            Khám phá không gian triển lãm 360°
+          </h2>
+        </div>
+        <StreetViewHotspotViewer location={location} />
+      </section>
+
+      {/* Content & Sidebars */}
       <section className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[1fr_0.82fr] lg:px-8">
         <div className="space-y-8">
           <article className="rounded-lg border border-white/10 bg-white/[0.06] p-5 backdrop-blur sm:p-7">
@@ -120,68 +128,21 @@ function LocationDetail() {
         </div>
 
         <aside className="space-y-8 lg:sticky lg:top-24 lg:self-start">
-          <section
-            ref={vrFrameRef}
-            className="overflow-hidden rounded-lg border border-white/10 bg-white/[0.06]"
-          >
-            <div className="relative aspect-[4/3] bg-black">
-              <iframe
-                title={`Trải nghiệm 360 độ - ${location.name}`}
-                src={location.vrLink}
-                className="h-full w-full"
-                loading="lazy"
-                allow="accelerometer; gyroscope; fullscreen; xr-spatial-tracking"
-                allowFullScreen
-              />
-              {hasVrExperience ? (
-                <div className="absolute right-3 top-3 flex gap-2">
-                  <button
-                    type="button"
-                    onClick={openFullscreen}
-                    className="rounded-md border border-white/20 bg-black/65 px-3 py-2 text-xs font-black uppercase tracking-wider text-white backdrop-blur transition hover:bg-black/85"
-                  >
-                    Toàn màn hình
-                  </button>
-                  {location.panoramaUrl && (
-                    <a
-                      href={location.panoramaUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="rounded-md border border-white/20 bg-black/65 px-3 py-2 text-xs font-black uppercase tracking-wider text-white backdrop-blur transition hover:bg-black/85"
-                    >
-                      Mở nguồn
-                    </a>
-                  )}
-                </div>
-              ) : (
-                <div className="pointer-events-none absolute inset-0 grid place-items-center px-5 text-center text-white">
-                  <div className="rounded-lg border border-white/15 bg-black/70 p-4 backdrop-blur">
-                    <p className="text-xs font-bold uppercase tracking-[0.3em] text-amber-300">
-                      Ảnh 360°
-                    </p>
-                    <p className="mt-2 text-sm leading-6 text-zinc-200">
-                      Khu vực nhúng trải nghiệm VR, Google Street View hoặc ảnh
-                      360° của nhóm.
-                    </p>
-                  </div>
-                </div>
-              )}
-            </div>
-          </section>
-
           <section className="rounded-lg border border-white/10 bg-white/[0.06] p-5 sm:p-6">
             <p className="text-xs font-bold uppercase tracking-[0.3em] text-amber-300">
               Hotspot triển lãm
             </p>
             <div className="mt-5 grid gap-3">
-              {location.hotspots.map((hotspot) => (
+              {location.hotspots.map((hotspot, idx) => (
                 <article
                   key={hotspot.title}
                   className="rounded-lg border border-white/10 bg-black/25 p-4 transition hover:border-amber-300/50 hover:bg-black/35"
                 >
-                  <h3 className="font-black text-white">{hotspot.title}</h3>
+                  <h3 className="font-black text-white">
+                    {idx + 1}. {hotspot.title}
+                  </h3>
                   <p className="mt-2 text-sm leading-6 text-zinc-300">
-                    {hotspot.content}
+                    {hotspot.question}
                   </p>
                 </article>
               ))}
