@@ -94,6 +94,15 @@ export default function StreetViewHotspotViewer({ location }) {
   const [noStreetView, setNoStreetView] = useState(false)
   const [isFullscreen, setIsFullscreen] = useState(false)
 
+  // Color/filter presets for the Street View container
+  const FILTER_PRESETS = {
+    original: '',
+    inverted: 'invert(1)',
+    amber: 'grayscale(0.15) sepia(0.35) saturate(1.6) hue-rotate(10deg) brightness(0.98)',
+    corrected: 'invert(1)',
+  }
+  const [filterPreset, setFilterPreset] = useState('inverted')
+
   // Track real size via ResizeObserver so projection is always accurate
   const [containerSize, setContainerSize] = useState({ width: 800, height: 450 })
 
@@ -233,7 +242,14 @@ export default function StreetViewHotspotViewer({ location }) {
         style={{ minHeight: isFullscreen ? '100vh' : 'clamp(380px, 55vw, 640px)' }}
       >
         {/* Google Street View target */}
-        <div ref={containerRef} className="absolute inset-0" />
+        <div
+          ref={containerRef}
+          className="absolute inset-0"
+          style={{
+            filter: FILTER_PRESETS[filterPreset] || undefined,
+            transition: 'filter 220ms ease',
+          }}
+        />
 
         {/* ── Top-left info badge ── */}
         <div className="pointer-events-none absolute inset-x-4 top-4 z-10 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
@@ -273,6 +289,8 @@ export default function StreetViewHotspotViewer({ location }) {
             </svg>
           )}
         </button>
+
+        {/* Filter fixed to 'N' tone (inverted) — presets removed per request */}
 
         {/* ── Loading spinner ── */}
         {!apiReady && !apiError && !noStreetView && (

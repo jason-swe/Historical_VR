@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from 'react-router-dom'
+import { NavLink, Outlet } from "react-router-dom";
 
 function Layout() {
   return (
@@ -11,7 +11,7 @@ function Layout() {
             </span>
             <span className="hidden text-left sm:block">
               <span className="block text-xs font-bold uppercase tracking-[0.32em] text-amber-300">
-                Bảo tàng số
+                Virtual Reality
               </span>
               <span className="block text-xs text-zinc-400">
                 Cách mạng Tháng Mười Nga
@@ -24,7 +24,7 @@ function Layout() {
               to="/"
               className={({ isActive }) =>
                 `rounded-md px-3 py-2 transition hover:bg-white/10 hover:text-amber-200 ${
-                  isActive ? 'bg-white/10 text-amber-200' : 'text-zinc-300'
+                  isActive ? "bg-white/10 text-amber-200" : "text-zinc-300"
                 }`
               }
             >
@@ -34,7 +34,7 @@ function Layout() {
               to="/map"
               className={({ isActive }) =>
                 `rounded-md px-3 py-2 transition hover:bg-white/10 hover:text-amber-200 ${
-                  isActive ? 'bg-white/10 text-amber-200' : 'text-zinc-300'
+                  isActive ? "bg-white/10 text-amber-200" : "text-zinc-300"
                 }`
               }
             >
@@ -48,7 +48,7 @@ function Layout() {
         <Outlet />
       </main>
     </div>
-  )
+  );
 }
 
-export default Layout
+export default Layout;
