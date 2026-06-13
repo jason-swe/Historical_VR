@@ -109,7 +109,7 @@ export default function StreetViewHotspotViewer({ location }) {
   const [pov, setPov] = useState({ heading: 0, pitch: 0 })
   const [zoom, setZoom] = useState(1)
 
-  const [activeHotspot, setActiveHotspot] = useState(null)
+  const [activeHotspotIndex, setActiveHotspotIndex] = useState(null)
   const [selectedAnswer, setSelectedAnswer] = useState(null)
 
   // ── Fullscreen toggle ─────────────────────────────────────────────────
@@ -148,7 +148,7 @@ export default function StreetViewHotspotViewer({ location }) {
     setApiReady(false)
     setApiError(null)
     setNoStreetView(false)
-    setActiveHotspot(null)
+    setActiveHotspotIndex(null)
     setSelectedAnswer(null)
 
     // Extract initial heading/pitch from vrLink
@@ -228,17 +228,29 @@ export default function StreetViewHotspotViewer({ location }) {
     }))
   }, [location.hotspots, pov, zoom, containerSize, apiReady])
 
+  const activeHotspot = activeHotspotIndex === null ? null : projectedHotspots[activeHotspotIndex]
   const answerIsCorrect = activeHotspot && selectedAnswer === activeHotspot.answer
+
+  const advanceHotspot = () => {
+    const nextIndex = (activeHotspotIndex ?? 0) + 1
+    if (nextIndex < projectedHotspots.length) {
+      setActiveHotspotIndex(nextIndex)
+      setSelectedAnswer(null)
+      return
+    }
+    setActiveHotspotIndex(null)
+    setSelectedAnswer(null)
+  }
 
   // ── Render ───────────────────────────────────────────────────────────
   return (
     <div
       ref={wrapperRef}
-      className="relative overflow-hidden rounded-xl border border-white/10 bg-zinc-950 shadow-2xl"
+      className="relative overflow-hidden rounded-xl border border-white/10 bg-[#08172f] shadow-2xl"
     >
       {/* Street View + hotspot overlay */}
       <div
-        className="relative w-full bg-[#111]"
+        className="relative w-full bg-[#08172f]"
         style={{ minHeight: isFullscreen ? '100vh' : 'clamp(380px, 55vw, 640px)' }}
       >
         {/* Google Street View target */}
@@ -253,7 +265,7 @@ export default function StreetViewHotspotViewer({ location }) {
 
         {/* ── Top-left info badge ── */}
         <div className="pointer-events-none absolute inset-x-4 top-4 z-10 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-          <div className="max-w-xs rounded-lg bg-black/75 px-4 py-2.5 text-white shadow-xl ring-1 ring-white/15 backdrop-blur-md">
+          <div className="max-w-xs rounded-lg bg-[#041022]/80 px-4 py-2.5 text-white shadow-xl ring-1 ring-white/15 backdrop-blur-md">
             <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-amber-300">
               Google Street View thực tế
             </p>
@@ -275,7 +287,7 @@ export default function StreetViewHotspotViewer({ location }) {
           type="button"
           onClick={toggleFullscreen}
           title={isFullscreen ? 'Thoát toàn màn hình' : 'Toàn màn hình'}
-          className="pointer-events-auto absolute right-4 top-4 z-10 grid h-9 w-9 place-items-center rounded-md border border-white/20 bg-black/65 text-white shadow-lg backdrop-blur transition hover:bg-black/85"
+          className="pointer-events-auto absolute right-4 top-4 z-10 grid h-9 w-9 place-items-center rounded-md border border-white/20 bg-[#041022]/70 text-white shadow-lg backdrop-blur transition hover:bg-[#041022]/90"
         >
             {isFullscreen ? (
             /* shrink / exit-fullscreen icon */
@@ -294,7 +306,7 @@ export default function StreetViewHotspotViewer({ location }) {
 
         {/* ── Loading spinner ── */}
         {!apiReady && !apiError && !noStreetView && (
-          <div className="absolute inset-0 z-20 grid place-items-center bg-zinc-950 text-center">
+          <div className="absolute inset-0 z-20 grid place-items-center bg-[#08172f] text-center">
             <div>
               <div className="mx-auto h-12 w-12 animate-spin rounded-full border-4 border-amber-300 border-t-transparent" />
               <p className="mt-4 text-sm font-bold uppercase tracking-widest text-amber-200">
@@ -306,7 +318,7 @@ export default function StreetViewHotspotViewer({ location }) {
 
         {/* ── No Street View coverage fallback ── */}
         {noStreetView && (
-          <div className="absolute inset-0 z-20 grid place-items-center bg-zinc-950 p-6 text-center text-white">
+          <div className="absolute inset-0 z-20 grid place-items-center bg-[#08172f] p-6 text-center text-white">
             <div className="max-w-sm">
               <div className="mx-auto mb-4 grid h-16 w-16 place-items-center rounded-full bg-amber-300/10 ring-2 ring-amber-300/30">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-amber-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -326,7 +338,7 @@ export default function StreetViewHotspotViewer({ location }) {
 
         {/* ── API Error fallback ── */}
         {apiError && (
-          <div className="absolute inset-0 z-20 grid place-items-center bg-zinc-950 p-6 text-center text-white">
+          <div className="absolute inset-0 z-20 grid place-items-center bg-[#08172f] p-6 text-center text-white">
             <div className="max-w-sm">
               <p className="text-xs font-bold uppercase tracking-widest text-rose-400">Lỗi tải Street View</p>
               <p className="mt-2 text-sm leading-6 text-zinc-400">
@@ -345,7 +357,7 @@ export default function StreetViewHotspotViewer({ location }) {
                 key={hotspot.title}
                 type="button"
                 onClick={() => {
-                  setActiveHotspot(hotspot)
+                  setActiveHotspotIndex(idx)
                   setSelectedAnswer(null)
                 }}
                 title={hotspot.title}
@@ -364,19 +376,25 @@ export default function StreetViewHotspotViewer({ location }) {
 
       {/* ── Hotspot popup modal ─────────────────────────────────────────── */}
       {activeHotspot && (
-        <div className="absolute inset-0 z-30 grid place-items-center bg-black/65 p-4 backdrop-blur-sm">
-          <div className="w-full max-w-2xl overflow-hidden rounded-xl border border-white/10 bg-[#151514] text-white shadow-2xl">
+        <div className="absolute inset-0 z-30 grid place-items-center bg-[#041022]/70 p-4 backdrop-blur-sm">
+          <div className="w-full max-w-2xl overflow-hidden rounded-xl border border-white/10 bg-[#0b1e3d] text-white shadow-2xl">
             {/* Header */}
-            <div className="flex items-start justify-between border-b border-white/10 bg-black/40 px-5 py-4 sm:px-6">
+            <div className="flex items-start justify-between border-b border-white/10 bg-[#041022]/45 px-5 py-4 sm:px-6">
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-amber-300">
                   Câu hỏi triết học Mác - Lênin
                 </p>
                 <h3 className="mt-1 text-lg font-black">{activeHotspot.title}</h3>
+                <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-sky-200/80">
+                  Câu {activeHotspotIndex + 1} / {projectedHotspots.length}
+                </p>
               </div>
               <button
                 type="button"
-                onClick={() => setActiveHotspot(null)}
+                onClick={() => {
+                  setActiveHotspotIndex(null)
+                  setSelectedAnswer(null)
+                }}
                 className="rounded-md border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-bold text-zinc-300 transition hover:bg-white/10 hover:text-white"
               >
                 ✕ Đóng
@@ -388,7 +406,7 @@ export default function StreetViewHotspotViewer({ location }) {
               <p className="text-base font-black leading-7 text-amber-100">
                 {activeHotspot.question}
               </p>
-              <div className="mt-3 rounded-lg border border-white/5 bg-black/30 p-3 text-xs leading-6 text-zinc-400">
+              <div className="mt-3 rounded-lg border border-white/5 bg-[#041022]/35 p-3 text-xs leading-6 text-zinc-400">
                 {activeHotspot.content}
               </div>
 
@@ -397,7 +415,7 @@ export default function StreetViewHotspotViewer({ location }) {
                 {activeHotspot.options?.map((opt, idx) => {
                   const isSelected = selectedAnswer === idx
                   const isCorrect = activeHotspot.answer === idx
-                  let cls = 'border-white/10 bg-white/5 text-zinc-200 hover:border-amber-400/50 hover:bg-amber-400/5'
+                  let cls = 'border-white/10 bg-white/5 text-zinc-200 hover:border-sky-400/50 hover:bg-sky-400/5'
                   if (selectedAnswer !== null) {
                     if (isCorrect)
                       cls = 'border-emerald-500 bg-emerald-950/40 text-emerald-300 font-bold'
@@ -440,14 +458,14 @@ export default function StreetViewHotspotViewer({ location }) {
             </div>
 
             {/* Footer */}
-            <div className="flex justify-end gap-3 border-t border-white/5 bg-black/20 px-5 py-3">
+            <div className="flex justify-end gap-3 border-t border-white/5 bg-[#041022]/25 px-5 py-3">
               {selectedAnswer !== null && (
                 <button
                   type="button"
-                  onClick={() => setActiveHotspot(null)}
+                  onClick={advanceHotspot}
                   className="rounded-md bg-amber-300 px-5 py-2 text-xs font-black uppercase tracking-wider text-zinc-950 transition hover:bg-amber-200"
                 >
-                  Hoàn tất
+                  {activeHotspotIndex + 1 < projectedHotspots.length ? 'Câu tiếp theo' : 'Hoàn tất'}
                 </button>
               )}
             </div>

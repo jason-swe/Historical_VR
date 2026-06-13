@@ -32,13 +32,13 @@ function RussiaMap() {
           position={location.coordinates}
         >
           <Popup>
-            <div className="w-72 overflow-hidden rounded-md bg-[#111110] text-white">
+            <div className="w-72 overflow-hidden rounded-md bg-[#0b1e3d] text-white">
               <div
                 className="h-28 bg-cover bg-center"
                 style={{ backgroundImage: `url('${location.bannerImage}')` }}
               />
               <div className="p-4">
-                <p className="text-xs font-bold uppercase tracking-[0.24em] text-amber-300">
+                <p className="text-xs font-bold uppercase tracking-[0.24em] text-sky-300">
                   {location.exhibitCode}
                 </p>
                 <h3 className="mt-2 text-lg font-black leading-tight text-white">
@@ -49,7 +49,7 @@ function RussiaMap() {
                 </p>
                 <Link
                   to={`/locations/${location.id}`}
-                  className="mt-4 inline-flex w-full items-center justify-center rounded-md bg-amber-300 px-4 py-2.5 text-sm font-black uppercase tracking-wider text-zinc-950 transition hover:bg-amber-200"
+                  className="mt-4 inline-flex w-full items-center justify-center rounded-md bg-sky-300 px-4 py-2.5 text-sm font-black uppercase tracking-wider text-zinc-950 transition hover:bg-sky-200"
                 >
                   Mở phòng trưng bày
                 </Link>

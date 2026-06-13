@@ -4,7 +4,7 @@ import { locations } from '../data/locations'
 function Home() {
   return (
     <>
-      <section className="relative overflow-hidden bg-[#10100f] text-white">
+      <section className="relative overflow-hidden bg-[#08172f] text-white">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-55"
           style={{
@@ -12,8 +12,8 @@ function Home() {
               "url('https://commons.wikimedia.org/wiki/Special:FilePath/Winter_Palace_Panorama_4.jpg')",
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/72 to-black/20" />
-        <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#10100f] to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#041022] via-[#08172f]/84 to-[#0b1e3d]/25" />
+        <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#08172f] to-transparent" />
 
         <div className="relative mx-auto grid min-h-[calc(100svh-68px)] max-w-7xl content-center px-4 py-20 sm:px-6 lg:px-8">
           <div className="max-w-4xl">
@@ -46,7 +46,7 @@ function Home() {
         </div>
       </section>
 
-      <section id="overview" className="bg-[#10100f] py-14 text-white sm:py-20">
+      <section id="overview" className="bg-[#08172f] py-14 text-white sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
             <div className="max-w-2xl">
@@ -70,14 +70,14 @@ function Home() {
               <Link
                 key={location.id}
                 to={`/locations/${location.id}`}
-                className="group overflow-hidden rounded-lg border border-white/10 bg-white/[0.06] transition hover:-translate-y-1 hover:border-amber-300/70 hover:bg-white/[0.1]"
+                className="group overflow-hidden rounded-lg border border-white/10 bg-white/[0.06] transition hover:-translate-y-1 hover:border-sky-300/70 hover:bg-white/[0.1]"
               >
                 <div
                   className="h-44 bg-cover bg-center transition duration-500 group-hover:scale-105"
                   style={{ backgroundImage: `url('${location.bannerImage}')` }}
                 />
                 <div className="p-5">
-                  <span className="text-xs font-bold uppercase tracking-[0.26em] text-amber-300">
+                  <span className="text-xs font-bold uppercase tracking-[0.26em] text-sky-300">
                     {String(index + 1).padStart(2, '0')} / {location.exhibitCode}
                   </span>
                   <h3 className="mt-3 text-xl font-black text-white">
@@ -86,7 +86,7 @@ function Home() {
                   <p className="mt-3 text-sm leading-6 text-zinc-300">
                     {location.philosophy[0]}
                   </p>
-                  <span className="mt-5 inline-flex text-sm font-black uppercase tracking-wider text-amber-200">
+                  <span className="mt-5 inline-flex text-sm font-black uppercase tracking-wider text-sky-200">
                     Khám phá
                   </span>
                 </div>

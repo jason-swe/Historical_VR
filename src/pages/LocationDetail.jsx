@@ -18,20 +18,20 @@ function LocationDetail() {
   ]
 
   return (
-    <div className="detail-zoom bg-[#0f0f0e] text-white">
+    <div className="detail-zoom bg-[#08172f] text-white">
       {/* Hero Section */}
       <section className="relative min-h-[88svh] overflow-hidden">
         <div
           className="absolute inset-0 scale-105 bg-cover bg-center detail-hero-image"
           style={{ backgroundImage: `url('${location.bannerImage}')` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-black/10" />
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0f0f0e] to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#041022] via-[#08172f]/78 to-[#0b1e3d]/18" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#08172f] to-transparent" />
 
         <div className="relative mx-auto flex min-h-[88svh] max-w-7xl flex-col justify-between px-4 py-8 sm:px-6 lg:px-8">
           <Link
             to="/map"
-            className="w-fit rounded-md border border-white/20 bg-black/25 px-4 py-2 text-sm font-bold text-white backdrop-blur transition hover:bg-white/10"
+            className="w-fit rounded-md border border-white/20 bg-[#0b1e3d]/45 px-4 py-2 text-sm font-bold text-white backdrop-blur transition hover:bg-white/10"
           >
             Quay lại bản đồ
           </Link>
@@ -77,7 +77,7 @@ function LocationDetail() {
               {infographicItems.map(([label, value]) => (
                 <div
                   key={label}
-                  className="rounded-lg border border-white/10 bg-black/25 p-4"
+                  className="rounded-lg border border-white/10 bg-[#0b1e3d]/50 p-4"
                 >
                   <p className="text-xs font-bold uppercase tracking-[0.22em] text-zinc-400">
                     {label}
@@ -136,7 +136,7 @@ function LocationDetail() {
               {location.hotspots.map((hotspot, idx) => (
                 <article
                   key={hotspot.title}
-                  className="rounded-lg border border-white/10 bg-black/25 p-4 transition hover:border-amber-300/50 hover:bg-black/35"
+                  className="rounded-lg border border-white/10 bg-[#0b1e3d]/50 p-4 transition hover:border-sky-300/50 hover:bg-[#0b1e3d]/70"
                 >
                   <h3 className="font-black text-white">
                     {idx + 1}. {hotspot.title}

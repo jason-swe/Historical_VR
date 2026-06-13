@@ -33,7 +33,7 @@ function QuizCard({ quiz }) {
                   : ''
               } ${
                 !isAnswered
-                  ? 'border-white/10 bg-black/25 text-zinc-200 hover:border-amber-300/60 hover:bg-black/35'
+                  ? 'border-white/10 bg-[#0b1e3d]/45 text-zinc-200 hover:border-sky-300/60 hover:bg-[#0b1e3d]/70'
                   : ''
               }`}
             >
